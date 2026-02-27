@@ -13,6 +13,8 @@
 # IntelliJ IDEA
 .idea/
 backend/.idea/
+backend/build/reports/
+backend/build/classes/
 *.iml
 
 # Android

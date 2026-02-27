@@ -19,20 +19,16 @@ data class ResponseRequest(
 
 object RetrofitClient {
 
-
-    private const val BASE_URL = "http://10.24.201.25:9876"
-
-
-    private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
+    private fun createRetrofit(baseUrl: String): Retrofit {
+        val url = "http://${baseUrl}:9876"
+        
+        return Retrofit.Builder()
+            .baseUrl("$url/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    val clipService: ClipService by lazy {
-        retrofit.create(ClipService::class.java)
+    fun getClipService(baseUrl: String): ClipService {
+        return createRetrofit(baseUrl).create(ClipService::class.java)
     }
-
-
 }

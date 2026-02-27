@@ -12,9 +12,15 @@ import kotlinx.coroutines.withContext
 class ClipboardRepository(private val context: Context) {
 
     private val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    private val sharedPreferences = context.getSharedPreferences("clipboard_sync_prefs", Context.MODE_PRIVATE)
 
     suspend fun syncClipboard(): Result<String> = withContext(Dispatchers.IO) {
         try {
+            val serverIp = sharedPreferences.getString("server_ip", "") ?: ""
+            if (serverIp.isEmpty()) {
+                return@withContext Result.failure(Exception("Server IP not configured"))
+            }
+
             // Get text from clipboard
             val clipData = clipboardManager.primaryClip
             val clipboardText = if (clipData != null && clipData.itemCount > 0) {
@@ -27,7 +33,8 @@ class ClipboardRepository(private val context: Context) {
                 return@withContext Result.failure(Exception("Clipboard is empty"))
             }
 
-            val response = RetrofitClient.clipService.exchange(ResponseRequest(clipboardText))
+            val clipService = RetrofitClient.getClipService(serverIp)
+            val response = clipService.exchange(ResponseRequest(clipboardText))
 
             if (response.isSuccessful) {
                 val responseBody = response.body()
