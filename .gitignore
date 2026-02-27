@@ -1,0 +1,19 @@
+.DS_Store
+*.DS_Store
+.vscode
+*.vscode
+
+# Gradle
+**/.gradle/
+**/build/
+
+# Kotlin
+**/.kotlin/
+
+# IntelliJ IDEA
+.idea/
+backend/.idea/
+*.iml
+
+# Android
+local.properties
