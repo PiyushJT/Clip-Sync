@@ -39,7 +39,7 @@ Method 2: Run using Intellij IDEA (Recommended for development)
 
 1. Open the backend directory in Intellij IDEA.
 2. Run the application:
-    - Open the `MainApplication` class.
+    - Open the `ClipsyncApplication` file.
     - Click the green play button to run the application.
 
 ### 2. Android Setup
@@ -49,19 +49,17 @@ Method 2: Run using Intellij IDEA (Recommended for development)
 - Your Android device and PC must be on the same local network.
 
 **Configuration:**
-1.  Find your PC's local IP address (e.g., `192.168.1.5`).
-2.  Open `android/app/src/main/java/com/piyushjt/clipsync/api/ClipService.kt`.
-3.  Update the `BASE_URL` to match your PC's IP and port:
-    ```kotlin
-    private const val BASE_URL = "http://YOUR_PC_IP:9876"
-    ```
-4.  Build and install the app on your Android device.
+1. Build and install the app on your Android device.
+2. Launch the **ClipSync** app.
+3. Find your PC's local IP address (e.g., `192.168.1.5`).
+4. Enter the IP address in the configuration field within the app.
+5. Tap **Save Configuration**.
 
 ## Usage
 
 ### On Android
-- **Manual Sync:** Open the Clip Sync app and tap the **Sync Clipboard** button.
-- **Widget:** Add the Clip Sync widget to your home screen for one-tap synchronization without opening the app.
+- **Configuration:** Open the ClipSync app to set or update the backend server IP address. The app features a modern Material 3 design with adaptive dynamic colors based on your device theme.
+- **Widget:** Add the ClipSync widget to your home screen for one-tap synchronization.
 
 ### On PC
 - Once the backend is running, any text synced from your phone will automatically appear in your PC's clipboard.
@@ -71,3 +69,13 @@ Method 2: Run using Intellij IDEA (Recommended for development)
 
 - `backend/`: Spring Boot server handling clipboard operations on the desktop.
 - `android/`: Android application with Compose UI and Glance Widget.
+
+## Project Status & Customization
+
+ClipSync is an open-source initiative designed for flexibility and cross-platform utility. We welcome innovation and encourage developers to **fork** this codebase to suit specific workflow requirements or to integrate additional features.
+
+If you develop improvements or identify opportunities for enhancement, pull requests and community contributions are highly encouraged as we strive to refine the seamless clipboard synchronization experience.
+
+## Licence
+
+No licence, use however you want😀.
