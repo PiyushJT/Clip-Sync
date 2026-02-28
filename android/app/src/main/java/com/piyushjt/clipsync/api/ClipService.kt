@@ -1,5 +1,6 @@
 package com.piyushjt.clipsync.api
 
+import androidx.annotation.Keep
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,8 +14,10 @@ interface ClipService {
 
 }
 
+@Keep
 data class ResponseRequest(
-    val text: String?
+    val text: String?,
+    val image: String? = null
 )
 
 object RetrofitClient {

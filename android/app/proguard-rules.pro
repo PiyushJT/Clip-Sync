@@ -1,9 +1,19 @@
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Retain Retrofit and Gson annotations
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepattributes AnnotationDefault
+
+# Keep the API data classes and interfaces
+-keep class com.piyushjt.clipsync.api.** { *; }
+-keep interface com.piyushjt.clipsync.api.ClipService { *; }
+
+# Prevent Gson from being removed or obfuscated
+-keep class com.google.gson.** { *; }
+-dontwarn com.google.gson.**
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
