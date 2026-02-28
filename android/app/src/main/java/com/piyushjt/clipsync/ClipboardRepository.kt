@@ -24,13 +24,9 @@ class ClipboardRepository(private val context: Context) {
             // Get text from clipboard
             val clipData = clipboardManager.primaryClip
             val clipboardText = if (clipData != null && clipData.itemCount > 0) {
-                clipData.getItemAt(0).text?.toString() ?: ""
+                clipData.getItemAt(0).text?.toString()?.takeIf { it.isNotEmpty() }
             } else {
-                ""
-            }
-
-            if (clipboardText.isEmpty()) {
-                return@withContext Result.failure(Exception("Clipboard is empty"))
+                null
             }
 
             val clipService = RetrofitClient.getClipService(serverIp)
@@ -38,9 +34,9 @@ class ClipboardRepository(private val context: Context) {
 
             if (response.isSuccessful) {
                 val responseBody = response.body()
-                val resultText = responseBody?.text ?: ""
+                val resultText = responseBody?.text?.takeIf { it.isNotEmpty() }
 
-                if (resultText.isNotEmpty()) {
+                if (resultText != null) {
                     // Copy received text to clipboard
                     // Note: clipboardManager.setPrimaryClip must be called on the main thread
                     withContext(Dispatchers.Main) {
@@ -49,7 +45,7 @@ class ClipboardRepository(private val context: Context) {
                     }
                     Result.success(resultText)
                 } else {
-                    Result.failure(Exception("Received empty text"))
+                    Result.success("Backend returned null or empty, skipping update")
                 }
             } else {
                 Result.failure(Exception("Error code: ${response.code()}"))

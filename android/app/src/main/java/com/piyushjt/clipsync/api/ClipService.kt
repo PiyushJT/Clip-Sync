@@ -14,7 +14,7 @@ interface ClipService {
 }
 
 data class ResponseRequest(
-    val text: String
+    val text: String?
 )
 
 object RetrofitClient {

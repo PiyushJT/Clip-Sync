@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 
-
 import java.awt.*;
 import java.awt.datatransfer.*;
-import java.io.OutputStream;
-import java.io.PrintStream;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -25,9 +23,12 @@ public class ClipController {
 
         String fromPC = getClipboardText();
 
-        setClipboardText(request.getText());
-
-        System.out.println(request.getText());
+        if (request.getText() != null && !request.getText().isEmpty()) {
+            setClipboardText(request.getText());
+            System.out.println("Received: " + request.getText());
+        } else {
+            System.out.println("Received null or empty, current: " + fromPC);
+        }
 
         return ResponseEntity.ok(
                 new RequestResponse(fromPC)
@@ -47,19 +48,22 @@ public class ClipController {
      * Retrieves a string from the system clipboard.
      */
     public static String getClipboardText() {
-        // Save the original error stream
-        PrintStream originalErr = System.err;
-        // Redirect it to nowhere
-        System.setErr(new PrintStream(OutputStream.nullOutputStream()));
 
         try {
+
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            return (String) clipboard.getData(DataFlavor.stringFlavor);
-        } catch (Exception e) {
-            return "Error: " + e.getMessage();
-        } finally {
-            // Restore the original error stream so you don't miss actual app errors
-            System.setErr(originalErr);
+            Transferable contents = clipboard.getContents(null);
+
+            if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                String text = (String) contents.getTransferData(DataFlavor.stringFlavor);
+                return !text.isEmpty() ? text : null;
+            }
+
+            return null;
+
+        }
+        catch (Exception e) {
+            return null;
         }
     }
 
