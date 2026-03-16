@@ -19,3 +19,4 @@ backend/build/classes/
 
 # Android
 local.properties
+android/app/release
