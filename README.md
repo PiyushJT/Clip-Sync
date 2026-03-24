@@ -17,20 +17,20 @@ When you trigger a "Sync", the Android app sends its current clipboard text to t
 ### 1. Clone the Repository
 First, clone the project to your PC:
 ```bash
-git clone https://github.com/piyushjt/clipboard-sync.git
-cd clipboard-sync
+git clone https://github.com/PiyushJT/Clip-Sync.git
+cd clip-sync
 ```
 
 ### 2. Backend Setup (PC)
 The backend is built with Java 21 and Spring Boot.
 
 **Prerequisites:**
-- Java 21 or higher installed.
+- Java 17 or higher installed.
 
 **Running the Backend:**
 1. Run the JAR:
    ```bash
-   java -jar build/libs/clipsync.jar
+   java -jar backend/clipsync.jar
    ```
    The server will start on port `9876`.
 

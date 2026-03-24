@@ -15,6 +15,7 @@
 backend/.idea/
 backend/build/reports/
 backend/build/classes/
+backend/build/generated
 *.iml
 
 # Android
