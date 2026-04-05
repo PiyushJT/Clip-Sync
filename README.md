@@ -22,12 +22,12 @@ cd clip-sync
 ```
 
 ### 2. Backend Setup (PC)
-The backend is built with Java 21 and Spring Boot.
+The backend is built with Java 17 and Spring Boot.
 
 **Prerequisites:**
 - Java 17 or higher installed.
 
-**Running the Backend:**
+**Running the Backend (must be running in background):**
 1. Run the JAR:
    ```bash
    java -jar backend/clipsync.jar
@@ -38,20 +38,20 @@ The backend is built with Java 21 and Spring Boot.
 To ensure Clip Sync is always ready, you can set it to run on startup:
 
 - **Windows:**
-  1. Create a shortcut of a batch file containing `java -jar path/to/clipsync.jar`.
+  1. Copy the jar file `java -jar backend/clipsync.jar`.
   2. Press `Win + R`, type `shell:startup`, and paste the shortcut there.
 - **macOS:**
   1. Open **System Settings** > **General** > **Login Items**.
   2. Add your JAR or a script to the list.
 - **Linux:**
-  1. Use `crontab -e` and add `@reboot java -jar /path/to/clipsync.jar &`.
+  1. Use `crontab -e` and add `@reboot java -jar backend/clipsync.jar &`.
 
 ---
 
 ### 3. Android Setup
 
 #### Install the App
-1. Transfer the `.apk` file to your phone and install it (enable "Install from unknown sources" if prompted).
+1. Transfer the `ClipSync.apk` file (in /android) to your phone and install it (enable "Install from unknown sources" if prompted).
 
 #### Connect to PC (IP Address)
 Your phone and PC must be on the **same local network**.
@@ -64,6 +64,7 @@ Your phone and PC must be on the **same local network**.
 1. Launch **ClipSync**.
 2. Enter your PC's IP address in the configuration field.
 3. Tap **Save Configuration**.
+4. Close the app completely (optional).
 
 ---
 
